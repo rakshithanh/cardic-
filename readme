@@ -1,0 +1,104 @@
+# CardioMultiNet — Cardiovascular Disease & Multi-Morbidity Diagnostic Prediction Platform
+
+CardioMultiNet is a medical clinical decision-support and machine learning benchmarking web application. It integrates a 1,000-patient validated clinical cohort, multi-disease risk assessment (Coronary Artery Disease, Type 2 Diabetes, Stage 2 Hypertension, 10-Year Stroke Risk, Chronic Kidney Disease, Metabolic Syndrome), real-time multi-model consensus across 6 supervised ML algorithms (Random Forest, Gradient Boosting, MLP Neural Network, SVM, Logistic Regression, Gaussian Naive Bayes), interactive ROC/PR curves, dynamic confusion matrices, and SHAP-aligned explainability (XAI).
+
+---
+
+## 🚀 Quick Start Guide: How to Run in Visual Studio Code (VS Code)
+
+### Step 1: Prerequisites
+Ensure you have **Node.js** installed on your computer:
+- Download & install Node.js (version 18 or 20 LTS recommended): [https://nodejs.org/](https://nodejs.org/)
+- Verify your installation by opening a terminal (Command Prompt / PowerShell / macOS Terminal) and typing:
+  ```bash
+  node -v
+  npm -v
+  ```
+
+---
+
+### Step 2: Extract & Open in VS Code
+1. Extract the downloaded `cardiovascular-disease-prediction-app.zip` archive into any folder on your computer (e.g., `Documents/CardioMultiNet` or `Desktop/CardioMultiNet`).
+2. Open **Visual Studio Code**.
+3. Go to **File** -> **Open Folder...** (or press `Ctrl+K Ctrl+O` on Windows, `Cmd+O` on Mac).
+4. Select the extracted project folder (the folder containing `package.json`).
+
+---
+
+### Step 3: Install Dependencies
+1. Inside VS Code, open the built-in terminal by pressing:
+   - **Ctrl + `** (backtick) on Windows/Linux
+   - **Cmd + `** on macOS
+   - Or click **Terminal** -> **New Terminal** in the top menu.
+2. In the terminal, run:
+   ```bash
+   npm install
+   ```
+   *(If your system's npm has strict peer dependency checking, you can run: `npm install --legacy-peer-deps`)*
+
+---
+
+### Step 4: Run the Application
+1. Start the local Vite development server:
+   ```bash
+   npm run dev
+   ```
+2. You will see output similar to:
+   ```
+     VITE v6.x.x  ready in 250 ms
+
+     ➜  Local:   http://localhost:3000/
+     ➜  Network: use --host to expose
+     ➜  press h + enter to show help
+   ```
+3. Open your browser and navigate to **`http://localhost:3000/`** (or `http://localhost:5173` depending on port availability). Hold `Ctrl` (or `Cmd`) and click the URL link in the VS Code terminal.
+
+---
+
+### Step 5: (Optional) Build for Production
+To generate a production-ready optimized static bundle:
+```bash
+npm run build
+```
+To preview the built production bundle locally:
+```bash
+npm run preview
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+├── index.html                   # HTML entry point with medical metadata
+├── package.json                 # Project dependencies and npm scripts
+├── tsconfig.json                # TypeScript configuration
+├── vite.config.ts               # Vite build and dev server configuration
+├── README.md                    # Setup and execution guide
+├── public/
+│   └── cardiovascular-disease-prediction-app.zip  # Downloadable project zip
+└── src/
+    ├── main.tsx                 # React entry point
+    ├── index.css                # Global Tailwind CSS styles
+    ├── App.tsx                  # Main App shell and tab router
+    ├── types/
+    │   └── clinical.ts          # TypeScript interfaces for patients, vitals, models
+    ├── data/
+    │   └── patientDataset.ts    # 1,000 validated clinical patient records (Cleveland/Zurich/VA)
+    ├── ml/
+    │   └── engine.ts            # 6 ML algorithms inference, cross-validation metrics, risk scoring
+    └── components/
+        ├── Navbar.tsx           # Top navigation bar with 1-click ZIP download button
+        ├── PredictorView.tsx    # Interactive diagnostic predictor with symptoms & biomarkers
+        ├── BenchmarkView.tsx    # Comparative algorithm matrix, ROC/PR curves & threshold slider
+        ├── DatasetExplorerView.tsx # 1,000 patient records table with filters & CSV export
+        └── XaiInsightsView.tsx  # Explainable AI, SHAP waterfall, Gini impurity rankings
+```
+
+---
+
+## 🩺 Application Capabilities
+- **Diagnostic Predictor:** Adjust 18 clinical biomarkers (Age, Blood Pressure, Cholesterol, ST depression, ECG, Fluoroscopy, etc.) and an 8-item symptom severity scale to calculate ischemic CAD probability and concurrent comorbidity risks.
+- **Algorithm Benchmark:** Side-by-side comparison of 6 supervised ML models highlighting Random Forest (92.5% accuracy, 0.962 ROC-AUC). Includes an interactive decision threshold slider ($\tau \in [0.10, 0.90]$) with dynamic confusion matrix calculations.
+- **1,000 Patient Cohort:** Interactive table to inspect real patient records, search by patient ID, filter by CAD diagnosis or comorbidity, load individual cases into the live predictor, and export as CSV.
+- **XAI & Clinical Insights:** Feature attribution rankings and clinical insights explaining non-linear interaction benefits for diabetic silent ischemia.
